@@ -7,9 +7,10 @@ def compatible_staticpath(path):
     has a cleaner or better way to do this let me know!
     '''
     try:
-        # >= 1.4
-        from django.contrib.staticfiles.storage import staticfiles_storage
-        return staticfiles_storage.url(path)
+        # >= 1.4 or Using staticfiles
+        if 'django.contrib.staticfiles' in settings.INSTALLED_APPS:
+            from django.contrib.staticfiles.storage import staticfiles_storage
+            return staticfiles_storage.url(path)
     except ImportError:
         pass
     try:
